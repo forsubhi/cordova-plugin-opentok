@@ -190,6 +190,7 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
           Log.i(TAG, "error when trying to retrieve publish audio/video property");
         }
         this.mView = mPublisher.getView();
+        mView.setLayoutParams(new FrameLayout.LayoutParams(300,300));
         frame.addView( this.mView );
         mSession.publish(mPublisher);
       }
