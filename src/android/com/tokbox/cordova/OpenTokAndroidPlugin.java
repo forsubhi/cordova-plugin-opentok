@@ -33,6 +33,7 @@ import com.opentok.android.Stream;
 import com.opentok.android.Stream.StreamVideoType;
 import com.opentok.android.Subscriber;
 import com.opentok.android.SubscriberKit;
+import android.widget.FrameLayout;
 
 
 public class OpenTokAndroidPlugin extends CordovaPlugin implements 
