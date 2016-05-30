@@ -34,6 +34,7 @@ import com.opentok.android.Stream.StreamVideoType;
 import com.opentok.android.Subscriber;
 import com.opentok.android.SubscriberKit;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 
 public class OpenTokAndroidPlugin extends CordovaPlugin implements 
@@ -54,6 +55,7 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
   static JSONObject viewList = new JSONObject();
   static CordovaInterface _cordova;
   static CordovaWebView _webView;
+  private LinearLayout linearLayout;
 
 
   public class RunnableUpdateViews implements Runnable{
@@ -191,8 +193,11 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
           Log.i(TAG, "error when trying to retrieve publish audio/video property");
         }
         this.mView = mPublisher.getView();
-        mView.setLayoutParams(new FrameLayout.LayoutParams(300,300));
-        frame.addView( this.mView );
+        linearLayout = new LinearLayout(cordova.getActivity());
+        linearLayout.setLayoutParams(new FrameLayout.LayoutParams(600,600));
+        linearLayout.addView(this.mView);
+        mView.setLayoutParams(new LinearLayout.LayoutParams(300,300));
+        frame.addView(linearLayout);
         mSession.publish(mPublisher);
       }
       super.run();
@@ -270,7 +275,8 @@ public class OpenTokAndroidPlugin extends CordovaPlugin implements
         mSubscriber.setSubscriberListener(this);
         ViewGroup frame = (ViewGroup) cordova.getActivity().findViewById(android.R.id.content);
         this.mView = mSubscriber.getView();
-        frame.addView( this.mView );
+        mView.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
+        linearLayout.addView(this.mView);
         mSession.subscribe(mSubscriber);
         Log.i(TAG, "subscriber view is added to parent view!");
       }
